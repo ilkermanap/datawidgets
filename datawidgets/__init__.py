@@ -1,7 +1,9 @@
 from . import *
 
-from PySide2.QtWidgets import QComboBox
+from PySide2.QtWidgets import QComboBox, QTableWidget, QTableWidgetItem
 from PySide2.QtCore import Signal
+
+    
 
 class DBComboBox(QComboBox):
     """
@@ -44,7 +46,6 @@ class DBComboBox(QComboBox):
         self.filters = filters
         self.textcolumn = textcolumn
         self.clear()
-
         if self.filters is None:
             records = self.session.query(self.dataobject).all()
             for record in records:
@@ -70,3 +71,23 @@ class DBComboBox(QComboBox):
         print(self.currentIndex())
         self.signalMasterId.emit(self.itemData(self.currentIndex()))
 
+class DBTableWidget(QTableWidget):
+    def __init__(self, parent,  datasession=None, dataobject=None):
+        super(DBTableWidget,self).__init__(parent)
+        
+        self.dataobject = dataobject
+        self.session = datasession
+        self.clear()
+        records = self.session.query(self.dataobject).all()
+
+        self.setRowCount(len(records))
+        self.setColumnCount(len(self.dataobject.__table__.columns.keys()))
+
+        self.setHorizontalHeaderLabels( self.dataobject.__table__.columns.keys())
+        i=0
+        for record in records:
+            j=0
+            for k in self.dataobject.__table__.columns.keys():
+                self.setItem(i, j,QTableWidgetItem( str(record.__dict__[k])))
+                j+=1
+            i+=1

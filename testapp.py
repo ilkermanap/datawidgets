@@ -3,7 +3,7 @@ from PySide2.QtWidgets import QApplication, QDialog
 
 from models import Session, City, District
 
-from datawidgets import DBComboBox
+from datawidgets import DBComboBox, DBTableWidget
 
 s = Session()
 
@@ -18,6 +18,8 @@ class MainWindow(QDialog, Ui_Dialog):
         self.district = DBComboBox(self.widget2, datasession=s, dataobject=District, textcolumn="name")
 
         self.district.setMaster(self.city, "city_id")
+
+        self.citylist = DBTableWidget(self.widget3, datasession=s, dataobject=City)
         self.show()
         
             

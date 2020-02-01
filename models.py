@@ -27,14 +27,15 @@ class District(Base):
     city_id = Column(Integer, ForeignKey('city.id'))
     city = relationship("City", back_populates="districts")
                      
+
     
-    
-if __name__ == "__main__":
+if __name__ == "__main__":    
     Base.metadata.create_all(engine)
     s = Session()
     testuser = User(name="ilker", salary=11500.2)
     s.add(testuser)
     s.commit()
+
     
     c1 = City(id=6,name="Ankara")
     c2 = City(id=34,name="Istanbul")
@@ -44,8 +45,6 @@ if __name__ == "__main__":
     d3 = District(name="Silivri", city_id=34)
     d4 = District(name="Cankaya", city_id=6)
     d5 = District(name="Yenimahalle", city_id=6)    
-
-    
     s.add(c1)
     s.add(c2)
     s.add(d1)
@@ -54,3 +53,4 @@ if __name__ == "__main__":
     s.add(d4)
     s.add(d5)
     s.commit()
+    

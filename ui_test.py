@@ -1,29 +1,42 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'test.ui',
-# licensing of 'test.ui' applies.
-#
-# Created: Fri Jan 31 23:47:48 2020
-#      by: pyside2-uic  running on PySide2 5.14.1
-#
-# WARNING! All changes made in this file will be lost!
+################################################################################
+## Form generated from reading UI file 'test.ui'
+##
+## Created by: Qt User Interface Compiler version 5.14.1
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
 
-from PySide2 import QtCore, QtGui, QtWidgets
+from PySide2.QtCore import (QCoreApplication, QMetaObject, QObject, QPoint,
+    QRect, QSize, QUrl, Qt)
+from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
+    QFontDatabase, QIcon, QLinearGradient, QPalette, QPainter, QPixmap,
+    QRadialGradient)
+from PySide2.QtWidgets import *
+
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(606, 125)
-        self.widget1 = QtWidgets.QWidget(Dialog)
-        self.widget1.setGeometry(QtCore.QRect(40, 20, 151, 31))
-        self.widget1.setObjectName("widget1")
-        self.widget2 = QtWidgets.QWidget(Dialog)
-        self.widget2.setGeometry(QtCore.QRect(260, 20, 151, 31))
-        self.widget2.setObjectName("widget2")
+        if Dialog.objectName():
+            Dialog.setObjectName(u"Dialog")
+        Dialog.resize(634, 295)
+        self.widget1 = QWidget(Dialog)
+        self.widget1.setObjectName(u"widget1")
+        self.widget1.setGeometry(QRect(40, 20, 151, 31))
+        self.widget2 = QWidget(Dialog)
+        self.widget2.setObjectName(u"widget2")
+        self.widget2.setGeometry(QRect(40, 60, 151, 31))
+        self.widget3 = QWidget(Dialog)
+        self.widget3.setObjectName(u"widget3")
+        self.widget3.setGeometry(QRect(210, 20, 381, 251))
 
         self.retranslateUi(Dialog)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+
+        QMetaObject.connectSlotsByName(Dialog)
+    # setupUi
 
     def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(QtWidgets.QApplication.translate("Dialog", "Dialog", None, -1))
+        Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
+    # retranslateUi
 
