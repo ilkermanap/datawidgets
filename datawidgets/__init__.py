@@ -3,8 +3,6 @@ from . import *
 from PySide2.QtWidgets import QComboBox, QTableWidget, QTableWidgetItem
 from PySide2.QtCore import Signal
 
-    
-
 class DBComboBox(QComboBox):
     """
     DBComboBox is extending a QCombobox with an
@@ -23,7 +21,7 @@ class DBComboBox(QComboBox):
     c1 = DBCombobox(datasession = session, dataobject=City)
     c2 = DBCombobox(datasession = session, dataobject=District)
 
-    c2.setMaster(c1, "districts")   # which we back_populated
+    c2.setMaster(c1, "city_id")   # which we back_populated
 
     """
 
@@ -32,8 +30,6 @@ class DBComboBox(QComboBox):
     def __init__(self, parent, datasession=None, dataobject=None, filters=None, textcolumn=None):
         super(DBComboBox, self).__init__(parent)
 
-    
-        
         #TODO: add code to check given columns in filters, idcolumn and textcolumn is present inside model
         try:
             #check existence of attributes 
@@ -65,6 +61,7 @@ class DBComboBox(QComboBox):
         self.mastercolumn = mastercolumn
         self.clear()
         comboobj.signalMasterId.connect(self.refill)
+        self.refill(comboobj.itemData(comboobj.currentIndex()))
 
         
     def idxChanged(self):
@@ -72,6 +69,9 @@ class DBComboBox(QComboBox):
         self.signalMasterId.emit(self.itemData(self.currentIndex()))
 
 class DBTableWidget(QTableWidget):
+
+    signalCellChange = Signal(object)
+
     def __init__(self, parent,  datasession=None, dataobject=None):
         super(DBTableWidget,self).__init__(parent)
         
@@ -91,3 +91,8 @@ class DBTableWidget(QTableWidget):
                 self.setItem(i, j,QTableWidgetItem( str(record.__dict__[k])))
                 j+=1
             i+=1
+        self.itemChanged.connect(self.cellChanged)
+
+    def cellChanged(self):
+        print(self.currentRow(), self.currentColumn(), self.currentItem().text())
+        pass
